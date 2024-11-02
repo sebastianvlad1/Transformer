@@ -1,0 +1,24 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore configuration files if they contain sensitive information
+config.py
+
+# Ignore raw dataset files that may be large or unprocessed
+tinyshakespeare.txt
+
+# Ignore environment and dependency files
+*.env
+*.lock
+
+# Ignore logs and output files
+logs/
+output/
+results/
+output-models/
+.idea/
