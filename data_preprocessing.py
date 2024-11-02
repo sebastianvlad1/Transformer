@@ -9,7 +9,7 @@ def load_and_prepare_data():
     stoi = { ch:i for i, ch in enumerate(vocabulary) }
     itos = { i:ch for i, ch in enumerate(vocabulary) }
     tensors = torch.tensor(tokenize(text, stoi), dtype=torch.long)
-    return tensors, stoi, itos
+    return tensors, stoi, itos, vocabulary
 
 def get_unique_sorted_characters(text):
     return sorted(list(set(text)))
