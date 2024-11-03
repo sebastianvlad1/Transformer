@@ -3,6 +3,7 @@ from evaluation import estimate_loss
 from utils import get_batch
 
 def train_model(eval_iters, model, train_data, val_data, batch_size, block_size):
+
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
 
     for iter in range(eval_iters):
