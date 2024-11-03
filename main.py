@@ -1,6 +1,7 @@
 from data_preprocessing import load_and_prepare_data, split_data
-from utils import get_batch
+from utils import get_batch, detokenize
 from BigramModel import BigramLanguageModel
+import torch
 
 def main():
     data, stoi, itos, vocabulary = load_and_prepare_data()
@@ -21,6 +22,8 @@ def main():
     model = BigramLanguageModel(len(vocabulary))
     out, loss = model(xb,yb)
     print(loss)
+
+    print(detokenize(model.generate(idx = torch.zeros((1, 1), dtype=torch.long), max_new_tokens=100)[0].tolist(), itos))
 
 
 if __name__ == "__main__":
