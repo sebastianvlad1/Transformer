@@ -5,12 +5,19 @@ torch.manual_seed(1337)
 
 # Using a probabilistic language model for the simpicity of the model
 class BigramLanguageModel(nn.Module):
-    def __init__(self, vocab_size):
+    def __init__(self, vocab_size, n_embd, block_size):
         super().__init__()
-        self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
+        self.token_embedding_table = nn.Embedding(vocab_size, n_embd)
+        self.position_embedding_table = nn.Embedding(block_size, n_embd)
+        self.lm_head = nn.Linear(n_embd, vocab_size)
 
     def forward(self, idx, targets=None):
-        logits = self.token_embedding_table(idx)
+        B, T = idx.shape
+
+        tkn_emb = self.token_embedding_table(idx) # (B, T, n_embd)
+        pos_emb = self.position_embedding_table(torch.arange(T))
+        x = tkn_emb + pos_emb
+        logits = self.lm_head(x) # (B, T, vocab_size)
 
         if targets is None:
             loss = None
